@@ -1,0 +1,4 @@
+2015-03-19
+Programming external board using ST-LINK
+- SB12 NRST must be OFF (open) if CN4 pin 5 is used for external board
+- Need to remove JP5, so nucleo board is not powered
