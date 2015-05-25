@@ -4271,7 +4271,7 @@ design rules under a new name.</description>
 <element name="ADE-C12" library="SparkFun-Passives" package="0603-CAP" value="33nF" x="-71.5" y="70"/>
 <element name="ADE-C14" library="SparkFun-Passives" package="0603-CAP" value="33nF" x="-71.5" y="63.5"/>
 <element name="ADE-C16" library="SparkFun-Passives" package="0603-CAP" value="33nF" x="-71.5" y="55"/>
-<element name="ADE-C1" library="rcl" package="C0603" value="100nF" x="-61.5" y="30.25" rot="R90"/>
+<element name="ADE-C1" library="rcl" package="C0603" value="0.1uF" x="-61.5" y="30.25" rot="R90"/>
 <element name="ADE-C2" library="rcl" package="C0805K" value="10uF" x="-63.5" y="30.25" rot="R90"/>
 <element name="ADE-C4" library="rcl" package="C0603" value="22pF" x="-43.25" y="36.75" rot="MR180"/>
 <element name="ADE-C3" library="rcl" package="C0603" value="22pF" x="-40.25" y="36.75" rot="MR0"/>
@@ -4285,7 +4285,7 @@ design rules under a new name.</description>
 <element name="STM-C13" library="rcl" package="C0603" value="100nF" x="-21.375" y="50.25" rot="R270"/>
 <element name="SIM900-C4" library="rcl" package="C0603" value="100nF" x="-35.5" y="47.5" rot="R270"/>
 <element name="ETHERNET" library="microbuilder" package="RJ45_PULSEJACK" value="" x="-12.75" y="100"/>
-<element name="SIM_C1" library="rcl" package="C0603" value="100nF" x="-37.25" y="47.5" rot="R90"/>
+<element name="SIM_C1" library="rcl" package="C0603K" value="100nF" x="-37.25" y="47.5" rot="R90"/>
 <element name="SIM_C2" library="rcl" package="C0603K" value="22pF" x="-38.75" y="47.5" rot="R90"/>
 <element name="IC1" library="microbuilder" package="SIM900_SMT" value="SIM900" x="-42" y="66"/>
 <element name="IC2" library="74xx-eu" package="SO16" value="74HC595D" x="-62" y="16.625"/>
@@ -4354,9 +4354,9 @@ design rules under a new name.</description>
 <element name="ADE-C5" library="rcl" package="153CLV-0605" value="10uF" x="-62.75" y="70" rot="R180"/>
 <element name="ADE-C6" library="rcl" package="C0603" value="100nF" x="-61.5" y="42.25" rot="R90"/>
 <element name="SYS-L1" library="rcl" package="POWER-CHOKE_WE-TPC" value="150Mhz" x="-62.625" y="77.125" rot="R180"/>
-<element name="SYS-R1" library="rcl" package="R0603" value="10R" x="-64.25" y="62" rot="R90"/>
-<element name="SYS-C1" library="rcl" package="C0603" value="100nF" x="-63.75" y="59.5"/>
-<element name="SYS-C2" library="rcl" package="C0603" value="100nF" x="-63.75" y="64.5"/>
+<element name="SYS-R1" library="SparkFun-Passives" package="0603-RES" value="10R" x="-64.25" y="62" rot="R90"/>
+<element name="SYS-C1" library="rcl" package="C0603" value="0.1uF" x="-63.75" y="59.5"/>
+<element name="SYS-C2" library="rcl" package="C0603" value="0.1uF" x="-63.75" y="64.5"/>
 <element name="W5500-C6" library="rcl" package="C0603" value="100nF" x="-10.25" y="76.75" rot="R90"/>
 <element name="W5500-C7" library="rcl" package="C0603" value="100nF" x="-13.875" y="76.75" rot="R90"/>
 <element name="W5500-C8" library="rcl" package="C0603" value="100nF" x="-18.5" y="76" rot="R90"/>
@@ -4369,9 +4369,9 @@ design rules under a new name.</description>
 <element name="SIM900-T4" library="transistor-neu-to92" package="SOT23-BEC" value="" x="-56.125" y="55.25"/>
 <element name="SIM900-R11" library="resistor" package="R0603" value="120R" x="-56.125" y="52.375" rot="R180"/>
 <element name="ESP-C1" library="rcl" package="C0603" value="100nF" x="-20.5" y="23.75"/>
-<element name="SYS-R2" library="rcl" package="R0603" value="10R" x="-62.625" y="82.125" rot="R180"/>
-<element name="SYS-C3" library="rcl" package="C0603" value="100nF" x="-60" y="82.625" rot="R270"/>
-<element name="SYS-C4" library="rcl" package="C0603" value="100nF" x="-65.25" y="82.625" rot="R270"/>
+<element name="SYS-R2" library="SparkFun-Passives" package="0603-RES" value="10R" x="-62.625" y="82.125" rot="R180"/>
+<element name="SYS-C3" library="rcl" package="C0603" value="0.1uF" x="-60" y="82.625" rot="R270"/>
+<element name="SYS-C4" library="rcl" package="C0603" value="0.1uF" x="-65.25" y="82.625" rot="R270"/>
 <element name="J5" library="SparkFun-Connectors" package="POWER_JACK_PTH" value="POWER_JACKPTH" x="-91" y="97.75" rot="R270">
 <attribute name="PROD_ID" value="CONN-08197" x="-91" y="97.75" size="1.778" layer="27" rot="R270" display="off"/>
 </element>
@@ -4401,11 +4401,11 @@ design rules under a new name.</description>
 <element name="ESP-VDD" library="adafruit" package="1X03" value="" x="-27.5" y="2.5"/>
 <element name="SR_OUT1" library="pinhead" package="2X05/90" value="" x="-60.75" y="2" rot="R180"/>
 <element name="SR_OUT2" library="pinhead" package="2X05/90" value="" x="-39.875" y="2" rot="R180"/>
-<element name="DHT-R1" library="rcl" package="R0603" value="10k" x="-4.875" y="18" rot="MR90"/>
+<element name="DHT-R1" library="resistor" package="R0603" value="10k" x="-4.875" y="18" rot="MR90"/>
 <element name="SENSOR-MQ6" library="SparkFun-Sensors" package="MQ-3" value="METHANE_SENSOR" x="-31.625" y="98.25"/>
 <element name="SENSOR-MQ7" library="SparkFun-Sensors" package="MQ-3" value="METHANE_SENSOR" x="-48.25" y="89.875"/>
-<element name="MQ6-R1" library="rcl" package="R0603" value="10k" x="-24.875" y="90.375" rot="R180"/>
-<element name="MQ7-R1" library="rcl" package="R0603" value="10k" x="-38.5" y="89" rot="R270"/>
+<element name="MQ6-R1" library="resistor" package="R0603" value="10k" x="-24.875" y="90.375" rot="R180"/>
+<element name="MQ7-R1" library="resistor" package="R0603" value="10k" x="-38.5" y="89" rot="R270"/>
 <element name="U$4" library="TFT_LCD_2.2" package="TFT_LCD_2.2+F_CS" value="TFT_LCD_2.2+F_CS" x="-38.5" y="45.75"/>
 <element name="W5500-C12" library="rcl" package="153CLV-0605" value="10uF/16V" x="-4.875" y="85.25" rot="R180"/>
 <element name="W5500-R12" library="resistor" package="R0805" value="12K4" x="-16.125" y="76.25" rot="R270"/>
@@ -4911,7 +4911,7 @@ design rules under a new name.</description>
 <wire x1="-19.125" y1="70.25" x2="-19.125" y2="71.375" width="0.254" layer="1"/>
 <wire x1="-19.125" y1="71.375" x2="-19.5" y2="71.75" width="0.254" layer="1"/>
 <wire x1="-21.975" y1="71.4" x2="-21.625" y2="71.75" width="0.254" layer="1"/>
-<wire x1="-37.225" y1="46.775" x2="-37.25" y2="46.65" width="0.4064" layer="1"/>
+<wire x1="-37.225" y1="46.775" x2="-37.25" y2="46.625" width="0.4064" layer="1"/>
 <wire x1="-39" y1="53.6" x2="-39" y2="52.75" width="0.3048" layer="1"/>
 <wire x1="-42" y1="49.775" x2="-42" y2="49.875" width="0.3048" layer="1"/>
 <wire x1="-38.75" y1="46.625" x2="-38.975" y2="46.75" width="0.3048" layer="1"/>
@@ -4933,9 +4933,9 @@ design rules under a new name.</description>
 <wire x1="-54.375" y1="53.625" x2="-50.025" y2="53.625" width="0.4064" layer="1"/>
 <wire x1="-50.025" y1="53.625" x2="-50" y2="53.6" width="0.4064" layer="1"/>
 <wire x1="-33.5" y1="46.65" x2="-35.5" y2="46.65" width="0.4064" layer="1"/>
-<wire x1="-37.25" y1="46.65" x2="-35.525" y2="46.625" width="0.4064" layer="1"/>
+<wire x1="-37.25" y1="46.625" x2="-35.525" y2="46.625" width="0.4064" layer="1"/>
 <wire x1="-35.525" y1="46.625" x2="-35.5" y2="46.65" width="0.4064" layer="1"/>
-<wire x1="-38.75" y1="46.625" x2="-37.25" y2="46.65" width="0.4064" layer="1"/>
+<wire x1="-38.75" y1="46.625" x2="-37.25" y2="46.625" width="0.4064" layer="1"/>
 <wire x1="-38.975" y1="46.75" x2="-42" y2="49.775" width="0.3048" layer="1"/>
 <wire x1="-35.975" y1="83" x2="-36" y2="83" width="0.4064" layer="1"/>
 <wire x1="-37.1" y1="83" x2="-37.525" y2="82.95" width="0.4064" layer="1"/>
@@ -5586,9 +5586,9 @@ design rules under a new name.</description>
 <wire x1="-35.525" y1="48.5" x2="-35.5" y2="48.35" width="0.4064" layer="1"/>
 <wire x1="-33.5" y1="48.35" x2="-35" y2="48.35" width="0.4064" layer="1"/>
 <wire x1="-35" y1="48.35" x2="-35.5" y2="48.35" width="0.4064" layer="1"/>
-<wire x1="-37.25" y1="48.35" x2="-35.025" y2="48.375" width="0.4064" layer="1"/>
+<wire x1="-37.25" y1="48.375" x2="-35.025" y2="48.375" width="0.4064" layer="1"/>
 <wire x1="-35.025" y1="48.375" x2="-35" y2="48.35" width="0.4064" layer="1"/>
-<wire x1="-38.75" y1="48.375" x2="-37.25" y2="48.35" width="0.4064" layer="1"/>
+<wire x1="-38.75" y1="48.375" x2="-37.25" y2="48.375" width="0.4064" layer="1"/>
 <wire x1="-38.875" y1="52" x2="-38.875" y2="48.5" width="0.3048" layer="1"/>
 <wire x1="-38.875" y1="48.5" x2="-38.75" y2="48.375" width="0.3048" layer="1"/>
 <via x="-38" y="55.375" extent="1-16" drill="0.6" shape="octagon"/>

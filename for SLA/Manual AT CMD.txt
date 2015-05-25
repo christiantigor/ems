@@ -1,0 +1,27 @@
+AT+CWMODE=3
+
+AT+CIPMUX=1
+
+AT+CIPSERVER=1,16038	AT+CIPSERVER=1,15002	AT+CIPSERVER=1,80
+
+AT+CWJAP="Belkin_G_Plus_MIMO",""
+AT+CWJAP="Tritronik Mobile","Tri12@11"
+
+AT+CIFSR
+
+AT+GMR
+
+//UDP
+AT+CIPSTART=1,"UDP","192.168.2.32",15002
+
+AT+CIPSEND=1,14
+
+IFOProbeDevice
+
+//get command
+AT+CIPSTART=1,"TCP","184.106.153.149",80
+
+AT+CIPSEND=1,70
+
+GET /talkbacks/887/commands/last?api_key=ACM8XW24UDVY1GTV HTTP/1.1
+GET /talkbacks/887/commands/last?api_key=ACM8XW24UDVY1GTV HTTP/1.1\r\n\r\n

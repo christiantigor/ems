@@ -1,0 +1,44 @@
+Partlist exported from C:/Users/tritronik/Documents/GitHub/ems/board_ems/ems_mbed/ems_mbed_rev_b.sch at 16/04/2015 10:26:34
+
+Qty Value            Device                     Package                 
+4                    BATTERY20PTH               BATTCOM_20MM_PTH        
+8                    LED0805_NOOUTLINE          CHIPLED_0805_NOOUTLINE  
+16                    MMBT2222ALT1-NPN-SOT23-BEC SOT23-BEC
+4                    Header Male 1x40                                
+4                    RJ45J0026D21BNL            RJ45_PULSEJACK          
+4                    SMACONNECTOR               SMA90_DIP               
+4                    Reset Push Button            
+12  100A             AUDIO_STEREOJACK           STX3100                 
+88  100nF            C-EUC0603                  C0603                   
+8   100uF            CPOL-EU153CLV-0605         153CLV-0605             
+8   10K              R-EU_R0603                 R0603                   
+4   10MHz            CRYSTALHC49US              HC49US                  
+12   10R              R-EU_R0603                 R0603                                    
+64  10k              R-US_R0603                 R0603                   
+8   10nF             C-EUC0603                  C0603                   
+4   10uF             C-USC0805K                 C0805K                               
+12   10uF/16V         CPOL-EU153CLV-0605         153CLV-0605             
+8   120R             R-EU_R0603                 R0603@1                                    
+4   150Mhz           L-USWE-TPC                 POWER-CHOKE_WE-TPC      
+8   18pF             C-EUC0603                  C0603                   
+36  1K               R-EU_R0603                 R0603                                   
+4   1M               R-US_R0603                 R0603@1                 
+4   1uF              C-EUC0603                  C0603                   
+12   22R              R-EU_R0603                 R0603                   
+4   22nF             C-EUC0603                  C0603                   
+16   22pF             C-EUC0603                  C0603                                     
+4   25MHz            XTAL/S                     QS                      
+4   32.768kHz        CRYSTALTC26H               TC26H                   
+8   330              R-US_R0603                 R0603@1                 
+12   33R              RESISTOR0603-RES           0603-RES                
+40  33nF             CAP0603-CAP                0603-CAP                
+8   4.3pF            C-EUC0603                  C0603                   
+8   4.7uF            C-EUC0603                  C0603                   
+16   49R9             R-US_R0603                 R0603@1                                    
+8   6.8nF            C-EUC0603                  C0603                   
+12   680R             R-EU_R0603                 R0603                                   
+8   74HC595D         74HC595D                   SO16                    
+12   81K              RESISTOR0603-RES           0603-RES                          
+4   BLM15HB121SN1    BLM15HB121SN1              0402                                      
+16   POWER_JACKPTH    POWER_JACKPTH              POWER_JACK_PTH                        
+4   SIMHOLDER3       SIMHOLDER3                 SIMHOLDER3
