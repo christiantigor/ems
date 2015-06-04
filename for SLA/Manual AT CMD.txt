@@ -18,10 +18,71 @@ AT+CIPSEND=1,14
 
 IFOProbeDevice
 
-//get command
+//get request
 AT+CIPSTART=1,"TCP","184.106.153.149",80
 
 AT+CIPSEND=1,70
 
 GET /talkbacks/887/commands/last?api_key=ACM8XW24UDVY1GTV HTTP/1.1
 GET /talkbacks/887/commands/last?api_key=ACM8XW24UDVY1GTV HTTP/1.1\r\n\r\n
+
+//post request (get token ubidots)
+AT+CIPSTART=1,"TCP","50.23.124.68",80<CR><LF>
+
+AT+CIPSEND=1,157<CR><LF>
+
+POST /api/v1.6/auth/token HTTP/1.1<LF>
+Accept: */*<LF>
+Accept-Encoding: gzip,deflate<LF>
+Content-Length: 0<LF>
+X-Ubidots-ApiKey: 1cc9c959b31e10cb2fc65452f39b49b8ad7d7050<CR><LF><CR><LF>
+
+//post request (send data ubidots)
+AT+CIPSTART=1,"TCP","50.23.124.68",80<CR><LF>
+
+AT+CIPSEND=1,287<CR><LF>
+
+POST /api/v1.6/variables/556bfc6c762542085a54fcb8/values HTTP/1.1<LF>
+Accept: */*<LF>
+Accept-Encoding: gzip,deflate<LF>
+Content-Length: 9<LF>
+Content-Type: application/x-www-form-urlencoded<LF>
+Host: things.ubidots.com<LF>
+X-Auth-Token: 9sLFIbPrtrToRLwoOw0kbSyJRUZRSuodXOFDmWlg2mmie6jr2BEU9B4AExZX<LF><LF>
+value=125<CR><LF><CR><LF>
+
+//get request (with proxy and authorization)
+AT+CIPSTART=1,"TCP","192.168.128.5",3128<CR><LF>
+AT+CIPSEND=1,97<CR><LF>
+GET https://www.google.co.id/ HTTP/1.1<LF>
+Host: www.google.co.id<LF>
+Proxy-Authorization: Basic Og==<CR><LF><CR><LF>
+
+
+AT+CIPSTART=1,"TCP","192.168.128.5",3128<CR><LF>
+AT+CIPSEND=1,94<CR><LF>
+GET http://www.example.com/ HTTP/1.1<LF>
+Host: www.example.com<LF>
+Proxy-Authorization: Basic Og==<CR><LF><CR><LF>
+
+
+AT+CIPSTART=1,"TCP","192.168.128.5",3128<CR><LF>
+AT+CIPSEND=1,153<CR><LF>
+GET https://api.thingspeak.com/talkbacks/887/commands/last?api_key=ACM8XW24UDVY1GTV HTTP/1.1<LF>
+Host: api.thingspeak.com<LF>
+Proxy-Authorization: Basic Og==<CR><LF><CR><LF>
+
+
+AT+CIPSTART=1,"TCP","216.58.196.99",80<CR><LF>
+AT+CIPSEND=1,18<CR><LF>
+GET / HTTP/1.1<CR><LF><CR><LF>
+
+//post request (with proxy and authorization)
+AT+CIPSTART=1,"TCP","192.168.128.5",3128<CR><LF>
+AT+CIPSEND=1,183<CR><LF>
+
+POST https://things.ubidots.com/api/v1.6/auth/token HTTP/1.1<LF>
+Accept: */*<LF>
+Accept-Encoding: gzip,deflate<LF>
+Content-Length: 0<LF>
+X-Ubidots-ApiKey: 1cc9c959b31e10cb2fc65452f39b49b8ad7d7050<CR><LF><CR><LF>

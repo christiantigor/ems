@@ -1,0 +1,330 @@
+#include "irRemote.h"
+
+//irRemote cmd
+char baseCmd[] = "<?xml version=\"1.0\" encoding=\"utf-8\"?><app_cmd cmd=";
+char dscvryCmd[] = "IFOProbeDevice";
+char cmd[255];
+
+//irRemote variable
+char rmtBuffer[512];
+string strRmtBuffer;
+int rmtRet;
+
+//liRemote variable
+//char liDir[] = "/sd/listRemote";
+char liDir[] = "/sd/listRemotes";
+
+/*ir remote*/
+void irRemote::initRemote(string _ipAddr) {
+    FILE *fp;
+    signed char c;
+    int i=0;
+    char rcv[255];
+    
+    //ipAddr
+    ipAddr = _ipAddr; 
+    
+    //construct mac file location
+    sprintf(cmd,"%s/%s/mac.txt",liDir,_ipAddr.c_str());
+    
+    //read mac file
+    fp = fopen(cmd,"r");
+    if(fp != NULL) {
+        while(1) {
+            c = fgetc(fp);
+            if(c == EOF){
+                break;
+            }
+            rcv[i] = c;
+            i++;
+        }    
+    }
+    fclose(fp);
+    macAddr = rcv;
+    memset(rcv,0,sizeof(rcv));    
+}
+
+int irRemote::entLrn() {
+    //init tcp socket
+    TCPSocketConnection tcpSock;
+    
+    //create tcp connection
+    tcpSock.connect(ipAddr.c_str(),PORT_TCP);
+    
+    //construct cmd to send
+    sprintf(cmd,"%s\"%d\"/>",baseCmd,1);
+    
+    //enter learn mode
+    tcpSock.send_all(cmd, sizeof(cmd)-1);
+    wait(0.5);
+    
+    //receive return
+    while(1) {
+        rmtRet = tcpSock.receive(rmtBuffer, sizeof(rmtBuffer));
+        if (rmtRet <=0)
+            break;    
+    }
+    
+    //check received return
+    string strBuffer = rmtBuffer;
+    if (strBuffer.find("OK") != std::string::npos)
+        return 1;
+    else
+        return 0;
+}
+
+int irRemote::cncLrn() {
+    //init tcp socket
+    TCPSocketConnection tcpSock;
+    
+    //create tcp connection
+    tcpSock.connect(ipAddr.c_str(),PORT_TCP);
+    
+    //construct cmd to send
+    sprintf(cmd,"%s\"%d\"/>",baseCmd,0);
+    
+    //cancel learn mode
+    tcpSock.send_all(cmd, sizeof(cmd)-1);
+    wait(0.5);
+    
+    //receive return
+    while(1) {
+        rmtRet = tcpSock.receive(rmtBuffer, sizeof(rmtBuffer));
+        if (rmtRet <=0)
+            break;    
+    }
+    
+    //check received return
+    string strBuffer = rmtBuffer;
+    if (strBuffer.find("OK") != std::string::npos)
+        return 1;
+    else
+        return 0;
+}
+
+string irRemote::getCode() {
+    //init tcp socket
+    TCPSocketConnection tcpSock;
+    
+    //create tcp connection
+    tcpSock.connect(ipAddr.c_str(),PORT_TCP);
+    
+    //construct cmd to send
+    sprintf(cmd,"%s\"%d\"/>",baseCmd,2);
+    
+    //get code
+    tcpSock.send_all(cmd, sizeof(cmd)-1);
+    wait(0.5);
+    
+    //receive return
+    while(1) {
+        rmtRet = tcpSock.receive(rmtBuffer, sizeof(rmtBuffer));
+        if (rmtRet <=0)
+            break;    
+    }
+    
+    //parsing code
+    strRmtBuffer = rmtBuffer;
+    strRmtBuffer = strRmtBuffer.substr(strRmtBuffer.find("<wifi_data"));
+    strRmtBuffer = strRmtBuffer.substr(strRmtBuffer.find("\"")+1);
+    strRmtBuffer = strRmtBuffer.substr(0,strRmtBuffer.find("\""));
+    return strRmtBuffer;
+}
+
+int irRemote::sendCode(string _cmd) {
+    //init tcp socket
+    TCPSocketConnection tcpSock;
+    
+    //create tcp connection
+    tcpSock.connect(ipAddr.c_str(),PORT_TCP);
+    
+    //construct cmd to send
+    sprintf(cmd,"%s\"%d\"<app_data code=\"%s\"/>",baseCmd,5,_cmd.c_str());
+    
+    //send code
+    tcpSock.send_all(cmd, sizeof(cmd)-1);
+    wait(0.5);
+    
+    //receive return
+    while(1) {
+        rmtRet = tcpSock.receive(rmtBuffer, sizeof(rmtBuffer));
+        if (rmtRet <=0)
+            break;    
+    }
+    
+    //check received return
+    string strBuffer = rmtBuffer;
+    if (strBuffer.find("OK") != std::string::npos)
+        return 1;
+    else
+        return 0;
+}
+
+int irRemote::putCmd(int _idx, string _cmd) {
+    FILE *fp;
+    
+    //construct file location
+    sprintf(cmd,"%s/%s/cmd%d.txt",liDir,ipAddr.c_str(),_idx);
+    
+    //write to file
+    fp = fopen(cmd,"w");
+    if(fp != NULL) {
+        fprintf(fp,_cmd.c_str());
+        fclose(fp);
+        return 1;    
+    }
+    fclose(fp);
+    return 0;
+}
+
+string irRemote::getCmd(int _idx) {
+    FILE *fp;
+    signed char c;
+    int i=0;
+    char rcv[255]; 
+    
+    //construct file location
+    sprintf(cmd,"%s/%s/cmd%d.txt",liDir,ipAddr.c_str(),_idx);
+    
+    //read from file
+    fp = fopen(cmd,"r");
+    if(fp != NULL) {
+        while(1) {
+            c = fgetc(fp);
+            if(c == EOF){
+                break;
+            }
+            rcv[i] = c;
+            i++;
+        }
+        fclose(fp);
+        return rcv;    
+    }
+    fclose(fp);
+    return "0";
+}
+
+/*list remote*/
+int lsRemote::clear(void) {
+    DIR *a, *b;
+    struct dirent *p, *q;
+    char pathA[64], pathB[64];
+    int n=0;
+    
+    a = opendir(liDir);
+    while((p = readdir(a)) != NULL) {
+        strcpy(pathA, liDir);
+        strcat(pathA,"/");
+        strcat(pathA,p->d_name);
+        b = opendir(pathA);
+        while((q = readdir(b)) != NULL) {
+            strcpy(pathB, pathA);
+            strcat(pathB,"/");
+            strcat(pathB,q->d_name);
+            remove(pathB);
+            memset(pathB,0,sizeof(pathB)); //clear path 
+            n++;   
+        }
+        remove(pathA);
+        memset(pathA,0,sizeof(pathA)); //clear path
+        n++;
+        closedir(b);   
+    }
+    closedir(a);
+    return n;
+}
+
+int lsRemote::discover(void) {
+    FILE *fp;
+    
+    //init udp socket
+    UDPSocket udpSock;
+    udpSock.bind(PORT_UDP);
+    udpSock.set_blocking(false,1000);
+    
+    //send broadcast msg
+    Endpoint remote;
+    remote.set_address("255.255.255.255",PORT_UDP);
+    udpSock.sendTo(remote,dscvryCmd,sizeof(dscvryCmd));
+    
+    char buffer[255];
+    string strBuffer;
+    Timer t;
+    int n=0;
+    
+    //FUTURE: clear list dir
+
+    //create list dir
+    mkdir(liDir,0777);
+    t.start();
+    while(t.read_ms() < TIMEOUT) {
+        udpSock.receiveFrom(remote,buffer,sizeof(buffer));
+        strBuffer = buffer;
+        if(strBuffer.find("IFOR") != std::string::npos) {
+            //parse mac address
+            strBuffer.erase(strBuffer.begin(),strBuffer.begin()+4);
+            strBuffer.erase(strBuffer.begin()+12,strBuffer.end());
+            
+            //construct remote dir
+            sprintf(cmd,"%s/%s",liDir,strBuffer.c_str());
+            
+            //create remote dir
+            mkdir(cmd,0777);
+            
+            //construct ipAddr file location
+            sprintf(cmd,"%s/%s/ipAddr.txt",liDir,strBuffer.c_str());
+            
+            //write to file
+            fp = fopen(cmd,"w");
+            if(fp != NULL) {
+                fprintf(fp,remote.get_address());
+                fclose(fp);    
+            }
+            fclose(fp);
+            n++;
+        }
+        memset(buffer,0,sizeof(buffer));    //clear buffer
+    }
+    udpSock.close();
+    return n;
+}
+
+string *lsRemote::getList(void) {
+    static string r[MAX_REMOTE];
+    DIR *a;
+    FILE *fp;
+    struct dirent *p;
+    char pathA[64];
+    char s[128];
+    string strS;
+    int i=0;
+    int j=0;
+    signed char c;
+    
+    a = opendir(liDir);
+    while((p = readdir(a)) != NULL) {
+        strcpy(pathA,liDir);
+        strcat(pathA,"/");
+        strcat(pathA,p->d_name);
+        strcat(pathA,"/ipAddr.txt");
+        //open file
+        fp = fopen(pathA,"r");
+        if(fp != NULL) {
+            while(1) {
+                c = fgetc(fp);
+                if(c == EOF){
+                    break;
+                }
+                s[i] = c;
+                i++;
+            }    
+        }
+        fclose(fp);
+        strS = s;
+        //put to array
+        r[j] = strS;
+        memset(pathA,0,sizeof(pathA)); //clear path
+    }
+    closedir(a);
+    return r;
+}
