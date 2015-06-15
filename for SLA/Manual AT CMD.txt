@@ -86,3 +86,16 @@ Accept: */*<LF>
 Accept-Encoding: gzip,deflate<LF>
 Content-Length: 0<LF>
 X-Ubidots-ApiKey: 1cc9c959b31e10cb2fc65452f39b49b8ad7d7050<CR><LF><CR><LF>
+
+
+//download firmware
+AT+CWMODE=3
+AT+CIPMUX=1
+AT+CIPSERVER=1,80
+AT+CIPSTART=1,"TCP","192.168.128.69",80
+
+AT+CIPSEND=1,45
+GET /emma/data/firmware/firmwareHex_0.bin
+
+AT+CIPSEND=1,43
+GET /emma/data/firmware/firmwareHex.bin
